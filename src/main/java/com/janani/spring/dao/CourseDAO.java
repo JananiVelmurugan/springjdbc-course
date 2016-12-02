@@ -38,7 +38,7 @@ public class CourseDAO {
 
 	public Course findByCode(String code) {
 
-		String query = "SELECT CODE,NAME,DESCRIPTION WHERE CODE=?";
+		String query = "SELECT CODE,NAME,DESCRIPTION FROM COURSE WHERE CODE=?";
 		Course course = jdbcTemplate.queryForObject(query, new Object[] { code }, (rs, row) -> {
 			Course c = convert(rs);
 			return c;

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="assets/jquery-3.1.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	alert("JQuery Loaded"); 
+	loadRecords();
+	$("#addBtn").click(insertRecord); 
+});
+
+function loadRecords(){
+	$("#listTbl tbody").html("");
+	var url="http://localhost:8080/course";
+	
+	$.getJSON(url,function(data){
+		console.log(JSON.stringfy(data));
+		
+		for(i in data){
+			var object = data[i];
+			var c = "<tr><td>"+object.code+"</td><td>"+object.name+"</td><td>"+object.description+"</td></tr>";
+			$("#listTbl tbody").append(c);
+			
+		}
+	});
+}
+
+function insertRecord(){
+	var code =$("#code").val();
+	var name =$("#name").val();
+	var description =$("#description").val();
+	var course = new Course(code,name,description);
+	console.log(JSON.stringfy(course));
+	var url ="http://localhost:8080/course";
+	var request=$.ajax({
+		url: url,
+		type: "POST",
+		data: JSON.stringfy(course),
+		contentType: "application/json",
+		dataType: "json"
+	});
+	
+	request.done(function(msg){
+		console.log(msg);
+		loadRecords();
+	});
+}
+</script>
+<title>Course Page</title>
+</head>
+<body>
+	<form>
+		<input type="text" id="code" required autofocus> <input
+			type="text" id="name" required> <input type="text"
+			id="description" required> <input type="button" id="addBtn"
+			value="Add">
+	</form>
+	<form>
+		<table id="listTbl" border=1>
+			<thead>
+				<tr>
+					<th>Code</th>
+					<th>Name</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</form>
+</body>
+</html>
