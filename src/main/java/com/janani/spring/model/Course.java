@@ -1,4 +1,4 @@
-package com.janani.spring.model;
+	package com.janani.spring.model;
 
 public class Course {
 	private String code;
@@ -27,6 +27,11 @@ public class Course {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "Course [code=" + code + ", name=" + name + ", description=" + description + "]";
 	}
 
 }

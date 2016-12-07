@@ -2,7 +2,9 @@
 <html>
 <head>
 <script src="assets/jquery-3.1.1.min.js"></script>
+
 <script>
+
 $(document).ready(function(){
 	alert("JQuery Loaded"); 
 	loadRecords();
@@ -14,7 +16,7 @@ function loadRecords(){
 	var url="http://localhost:8080/course";
 	
 	$.getJSON(url,function(data){
-		console.log(JSON.stringfy(data));
+		console.log(JSON.stringify(data));
 		
 		for(i in data){
 			var object = data[i];
@@ -29,21 +31,23 @@ function insertRecord(){
 	var code =$("#code").val();
 	var name =$("#name").val();
 	var description =$("#description").val();
-	var course = new Course(code,name,description);
-	console.log(JSON.stringfy(course));
+	var course = {"code":code,"name":name,"description":description};
+	console.log("Input Data: "+JSON.stringify(course));
 	var url ="http://localhost:8080/course";
 	var request=$.ajax({
 		url: url,
 		type: "POST",
-		data: JSON.stringfy(course),
+		data: JSON.stringify(course),
 		contentType: "application/json",
 		dataType: "json"
-	});
+	}); 
 	
-	request.done(function(msg){
+	
+ request.done(function(msg){
 		console.log(msg);
 		loadRecords();
-	});
+	}); 
+	//var request = $.post(url,JSON.stringify(course),json);
 }
 </script>
 <title>Course Page</title>

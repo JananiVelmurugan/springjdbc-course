@@ -26,44 +26,45 @@ public class CourseRestController {
 
 	@GetMapping("/course")
 	public List<Course> getCustomers() {
-		
+
 		return courseDAO.findAll();
-		
+
 	}
 
 	@GetMapping("/course/{code}")
 	public ResponseEntity<?> getCourse(@PathVariable("code") String code) {
-		
+
 		Course course = courseDAO.findByCode(code);
 		if (course == null) {
 			return new ResponseEntity<>("No course found for code " + code, HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(course, HttpStatus.OK);
-		
+
 	}
 
 	@PostMapping(value = "/course")
 	public ResponseEntity<?> createCourse(@RequestBody Course course) {
-		
+		// System.out.println(course);
+
 		courseDAO.create(course);
 		return new ResponseEntity<>(course, HttpStatus.OK);
-		
+
 	}
 
 	@DeleteMapping("/course/{code}")
 	public ResponseEntity<?> deleteCourse(@PathVariable String code) {
-		
+
 		courseDAO.delete(code);
 		return new ResponseEntity<>(code, HttpStatus.OK);
-		
+
 	}
 
 	@PutMapping(value = "/course/{code}")
 	public ResponseEntity<?> updateCustomer(@PathVariable String code, @RequestBody Course course) {
-
+		System.out.println("Updating");
 		courseDAO.update(course);
 		return new ResponseEntity<>(course, HttpStatus.OK);
-		
+
 	}
 
 }

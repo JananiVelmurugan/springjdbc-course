@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,10 @@ import com.janani.spring.util.ConnectionUtil;
 @Component
 public class CourseDAO {
 
-	private JdbcTemplate jdbcTemplate = ConnectionUtil.getJdbcTemplate();
+	// private JdbcTemplate jdbcTemplate = ConnectionUtil.getJdbcTemplate();
+
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
 	public void create(Course course) {
 
