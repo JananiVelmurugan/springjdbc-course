@@ -61,7 +61,7 @@ public class CourseRestController {
 
 	@PutMapping(value = "/course/{code}")
 	public ResponseEntity<?> updateCustomer(@PathVariable String code, @RequestBody Course course) {
-		System.out.println("Updating");
+		// System.out.println("Updating");
 		courseDAO.update(course);
 		return new ResponseEntity<>(course, HttpStatus.OK);
 
